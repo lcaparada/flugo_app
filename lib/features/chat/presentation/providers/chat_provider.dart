@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
@@ -13,6 +14,7 @@ class ChatProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool _isSending = false;
   String? _errorMessage;
+  StreamSubscription<DatabaseEvent>? _messagesSubscription;
 
   List<Message> get messages => _messages;
   bool get isLoading => _isLoading;
@@ -27,7 +29,9 @@ class ChatProvider extends ChangeNotifier {
     _isLoading = true;
     notifyListeners();
 
-    _messagesRef.onValue.listen(
+    _messagesSubscription?.cancel();
+
+    _messagesSubscription = _messagesRef.onValue.listen(
       (DatabaseEvent event) {
         final data = event.snapshot.value;
 
@@ -103,5 +107,11 @@ class ChatProvider extends ChangeNotifier {
   void clearError() {
     _errorMessage = null;
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _messagesSubscription?.cancel();
+    super.dispose();
   }
 }

@@ -21,11 +21,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
-        ChangeNotifierProvider(create: (_) => ChatProvider()),
-      ],
+    return ChangeNotifierProvider(
+      create: (_) => AuthProvider(),
       child: MaterialApp(
         title: 'Flugo',
         debugShowCheckedModeBanner: false,
@@ -44,7 +41,10 @@ class AuthWrapper extends StatelessWidget {
     return Consumer<AuthProvider>(
       builder: (context, authProvider, child) {
         if (authProvider.isAuthenticated) {
-          return const ChatScreen();
+          return ChangeNotifierProvider(
+            create: (_) => ChatProvider(),
+            child: const ChatScreen(),
+          );
         }
 
         return const LoginScreen();
