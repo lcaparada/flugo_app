@@ -65,34 +65,18 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Form(
               key: _formKey,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 48,
-                        height: 48,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Icon(
-                          Icons.chat_bubble_rounded,
-                          color: Colors.white,
-                          size: 28,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Text(
-                        'Flugo',
-                        style: Theme.of(context).textTheme.displayMedium
-                            ?.copyWith(color: AppColors.primary),
-                      ),
-                    ],
+                  SizedBox(
+                    width: 150,
+                    height: 150,
+                    child: Image.asset(
+                      'assets/images/logo2.png',
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                  const SizedBox(height: 48),
+                  const SizedBox(height: 16),
 
                   Text(
                     'Bem-vindo de volta!',
