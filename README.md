@@ -224,6 +224,34 @@ Antes de gerar o APK de produção, configure:
 - **Provider** (6.1.5) - Gerenciamento de estado
 - **Intl** (0.19.0) - Formatação de datas e internacionalização
 
+## 🧪 Testes Automatizados
+
+O projeto inclui testes automatizados para garantir qualidade e confiabilidade:
+
+### Executar os Testes
+
+```bash
+# Todos os testes
+flutter test
+
+# Com cobertura de código
+flutter test --coverage
+
+# Teste específico
+flutter test test/models/message_model_test.dart
+```
+
+### Cobertura de Testes
+
+- ✅ **35 testes** implementados
+- ✅ **Message Model**: Testes completos de serialização e lógica
+- ✅ **MessageBubble Widget**: Testes de UI e comportamento
+- ✅ **AuthButton Widget**: Testes de interação e estados
+- ✅ **AuthTextField Widget**: Testes de validação e input
+- ✅ **App Theme**: Testes de configuração e tema
+
+Para mais detalhes, veja [test/README_TESTS.md](test/README_TESTS.md)
+
 ## 📊 Firebase Realtime Database - Estrutura de Dados
 
 ```json

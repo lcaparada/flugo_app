@@ -1,30 +1,66 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:flugo_app/main.dart';
+import 'package:flugo_app/core/theme/app_theme.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  group('App Theme Tests', () {
+    test('should have valid light theme', () {
+      final theme = AppTheme.lightTheme;
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+      expect(theme, isNotNull);
+      expect(theme.useMaterial3, true);
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    test('should have scaffold background color defined', () {
+      final theme = AppTheme.lightTheme;
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+      expect(theme.scaffoldBackgroundColor, isNotNull);
+    });
+
+    test('should have input decoration theme defined', () {
+      final theme = AppTheme.lightTheme;
+
+      expect(theme.inputDecorationTheme, isNotNull);
+      expect(theme.inputDecorationTheme.filled, true);
+    });
+
+    test('should have elevated button theme defined', () {
+      final theme = AppTheme.lightTheme;
+
+      expect(theme.elevatedButtonTheme, isNotNull);
+    });
+
+    test('should have app bar theme defined', () {
+      final theme = AppTheme.lightTheme;
+
+      expect(theme.appBarTheme, isNotNull);
+      expect(theme.appBarTheme.centerTitle, true);
+    });
+
+    test('should have text theme defined', () {
+      final theme = AppTheme.lightTheme;
+
+      expect(theme.textTheme, isNotNull);
+      expect(theme.textTheme.displayLarge, isNotNull);
+      expect(theme.textTheme.bodyLarge, isNotNull);
+    });
+  });
+
+  group('Color Scheme Tests', () {
+    testWidgets('should apply theme to MaterialApp', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          theme: AppTheme.lightTheme,
+          home: const Scaffold(
+            body: Center(
+              child: Text('Test'),
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('Test'), findsOneWidget);
+      expect(find.byType(Scaffold), findsOneWidget);
+    });
   });
 }
